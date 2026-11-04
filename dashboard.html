@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Scanning System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">SD</span>
+            <span>Scanning System</span>
+        </div>
+
+        <p class="menu-heading">MAIN MENU</p>
+
+        <nav>
+            <a href="{{ url_for('dashboard') }}" class="nav-link active">
+                Dashboard
+            </a>
+
+            <a href="#documents" class="nav-link">
+                Documents
+            </a>
+
+            <a href="#categories" class="nav-link">
+                Categories
+            </a>
+
+            <a href="#activity" class="nav-link">
+                Activity History
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Logged in as</p>
+            <strong>{{ full_name }}</strong>
+
+            <form action="{{ url_for('logout') }}" method="POST">
+                <input type="hidden" name="csrf_token"
+                       value="{{ csrf_token() }}">
+                <button type="submit" class="logout-button">
+                    Log Out
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Overview of your document management system.</p>
+            </div>
+
+            <span class="user-badge">{{ full_name }}</span>
+        </header>
+
+        <section class="welcome-section">
+            <h2>Welcome back, {{ full_name }}!</h2>
+            <p>Manage, organize and retrieve company documents.</p>
+        </section>
+
+        <section class="stats-grid">
+            <article class="stat-card">
+                <p>Total Documents</p>
+                <h2>0</h2>
+                <span>Documents stored in the system</span>
+            </article>
+
+            <article class="stat-card">
+                <p>Scanned Today</p>
+                <h2>0</h2>
+                <span>Documents added today</span>
+            </article>
+
+            <article class="stat-card">
+                <p>Pending Review</p>
+                <h2>0</h2>
+                <span>Documents awaiting review</span>
+            </article>
+        </section>
+
+        <section class="content-card" id="documents">
+            <div class="section-heading">
+                <div>
+                    <h2>Recent Documents</h2>
+                    <p>Your latest uploaded and scanned documents.</p>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <input type="search"
+                       placeholder="Search documents..."
+                       aria-label="Search documents"
+                       disabled>
+
+                <button type="button" disabled>
+                    Search
+                </button>
+            </div>
+
+            <div class="empty-state">
+                <div class="empty-icon">DOC</div>
+                <h3>No documents yet</h3>
+                <p>
+                    Documents will appear here when they are
+                    added to the system.
+                </p>
+            </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            Scanning &amp; Data Management System
+        </footer>
+
+    </main>
+
+</body>
+</html>
